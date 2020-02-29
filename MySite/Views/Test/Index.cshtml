@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.ActionLink("Images", /* Link */
+    "Create",/* Action */
+    "SiteImages",/* Controller */
+    new { ContentDataId = "123", /* parameters */
+        cont =1 },
+    new { target = "_blank" })
+
+<hr />
+
+@using (Html.BeginForm("Submit", /* Action */
+                        "Test", /* Controller */
+                        null, /* routeValues */
+                        FormMethod.Post, 
+                        new { id = "-1" }))
+{
+    @Html.Label("Username")
+    @Html.TextBox("UserName", null, new { @class = "form-control" })
+    <br/>
+    <input type="submit" value="Submit" />
+}

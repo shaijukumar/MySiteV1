@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MySite.Models.Employee>
+
+@{
+    ViewBag.Title = "ViewAll";
+}
+
+<h2>ViewAll</h2>
+
+@foreach (var m in Model)
+{
+    Html.RenderPartial("_PartialTable", m);
+}
+
+<div ng-app="myapp">
+    <div ng-controller="HelloController" ng-init="init()">        
+        <input type="button" ng-click="ShowImages()" value="Refresh" />
+        <ul>
+            <li ng-repeat="img in ImageList">{{img.Name}} |  {{img.ContentDataId}}</li>            
+        </ul>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/JavaScript">
+
+        var App = angular.module("myapp", []);
+
+        App.controller("HelloController", function ($scope, $http) {
+
+            $scope.init = function () {                    
+                UpdateImageList();
+            }   
+
+            $scope.ShowImages = function () {
+                UpdateImageList();                   
+            }
+
+            function UpdateImageList() {
+                //https://www.w3schools.com/angular/angular_http.asp
+                $http.get("/SiteImages/ImageList?ContentDataId=123")
+                    .then(function (data) {
+                        $scope.ImageList = angular.fromJson(data.data);
+                    }, function (response) { console.log("Error" + response) });
+            }                
+        });
+
+    </script>
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/angular.js"></script>

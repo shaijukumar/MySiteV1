@@ -1,0 +1,34 @@
+﻿@model MySite.Models.Employee
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true);
+
+    @Html.LabelFor(model => model.EmployeeId)
+    @:&nbsp;&nbsp;&nbsp;
+    @Html.EditorFor(model => model.EmployeeId)
+    @Html.ValidationMessageFor(model => model.EmployeeId)
+    <br />
+    @Html.LabelFor(model => model.EmployeeName)
+    @:&nbsp;&nbsp;&nbsp;
+    @Html.EditorFor(model => model.EmployeeName)
+    @Html.ValidationMessageFor(model => model.EmployeeName)
+    <br />
+    @Html.LabelFor(model => model.Salary)
+    @:&nbsp;&nbsp;&nbsp;
+    @Html.EditorFor(model => model.Salary)
+    @Html.ValidationMessageFor(model => model.Salary)
+    <br />
+    <input type="submit" value="Submit" />
+}
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+}
